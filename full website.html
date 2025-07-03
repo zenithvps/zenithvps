@@ -1,0 +1,2150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zenith Store Cloud Hosting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'SF Pro';
+            src: url('https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfrancisco-display-regular-webfont.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        :root {
+            --primary: #0069ff;
+            --primary-dark: #0052cc;
+            --primary-light: #e6f0ff;
+            --primary-lighter: #f5f9ff;
+            --dark: #0a2540;
+            --darker: #071a2e;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #94a3b8;
+            --light-gray: #e2e8f0;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 10px 30px rgba(0, 105, 255, 0.2);
+            --border-radius: 12px;
+            --border-radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition-slow: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --region-icon-size: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.75rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+        }
+
+        h5 {
+            color: #ff4444;
+            font-size: 1rem;
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            color: var(--gray-light);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Layout */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1 2rem;
+        }
+
+        section {
+            padding: 6rem 0;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: var(--transition-slow);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+            font-size: 1.05rem;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 101;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding-top: 140px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.digitalocean.com/api/static-content/v1/images?src=%2F_next%2Fstatic%2Fmedia%2Fproduct-docs.33714928.svg&width=750') center/cover no-repeat;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-size: 1.25rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            padding-right: 2rem;
+        }
+
+        .about-image {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow);
+            transform: rotateY(-5deg) rotateX(5deg);
+            transition: var(--transition-slow);
+        }
+
+        .about-image:hover img {
+            transform: rotateY(0) rotateX(0);
+            box-shadow: 0 15px 40px rgba(0, 105, 255, 0.15);
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin: 4rem 0;
+        }
+
+        .stat-item {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--light-gray);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Pricing Cards */
+        .pricing-section {
+            background: var(--primary-lighter);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://cdn.dribbble.com/userupload/24109776/file/original-e1bb4ae223e39036b8c6294e0af2eae6.png?resize=1024x768&vertical=center') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .pricing-section .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin: 4rem 0;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition-slow);
+            position: relative;
+            border: 1px solid var(--light-gray);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 105, 255, 0.1) 0%, rgba(0, 105, 255, 0) 100%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card.popular {
+            border: 2px solid var(--primary);
+            transform: scale(1.02);
+            z-index: 1;
+        }
+
+        .card.popular::after {
+            content: 'Best Value';
+            position: absolute;
+            top: 12px;
+            right: -30px;
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 1.8rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transform: rotate(45deg);
+            z-index: 2;
+            box-shadow: 0 2px 10px rgba(0, 105, 255, 0.3);
+        }
+
+        .card-header {
+            padding: 2.5rem 2rem;
+            border-bottom: 1px solid var(--light-gray);
+            text-align: center;
+            position: relative;
+            background: var(--white);
+            z-index: 2;
+        }
+
+        .card-header h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--gray);
+            margin-top: 0.5rem;
+            margin-left: 0.25rem;
+        }
+
+        .card-body {
+            padding: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .specs {
+            margin-bottom: 2.5rem;
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .spec-item:hover {
+            transform: translateX(5px);
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-item span:first-child {
+            color: var(--gray);
+        }
+
+        .spec-item span:last-child {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .os-list h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+        }
+
+        .os-list h4::before {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--light-gray);
+            margin-right: 1rem;
+        }
+
+        .os-list h4::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--light-gray);
+            margin-left: 1rem;
+        }
+
+        .os-list ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .os-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .os-list li:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .os-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .os-list li:hover .os-icon {
+            transform: scale(1.1);
+        }
+
+        /* Styles untuk Available Regions */
+        .region-list {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--light-gray);
+        }
+
+        .region-list h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+        }
+
+        .region-list h4::before {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--light-gray);
+            margin-right: 1rem;
+        }
+
+        .region-list h4::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--light-gray);
+            margin-left: 1rem;
+        }
+
+        .region-list ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .region-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+
+        .region-list li:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .region-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            border-radius: 50%;
+            border: 1px solid var(--light-gray);
+            transition: var(--transition);
+        }
+
+        .region-list li:hover .region-icon {
+            transform: scale(1.1);
+            border-color: var(--primary);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 105, 255, 0.3);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-lg {
+            padding: 1.25rem 2rem;
+            font-size: 1.2rem;
+            border-radius: var(--border-radius);
+        }
+
+        /* Warranty Section */
+        .guarantee-section {
+            background: var(--darker);
+            color: #0052cc;
+        }
+
+        .guarantee-section h2 {
+            color: white;
+            -webkit-text-fill-color: white;
+            background: none;
+        }
+
+        .guarantee-section .subtitle {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .warranty-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem;
+            margin-top: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--primary);
+            transition: var(--transition);
+        }
+
+        .warranty-info:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .warranty-info h3 {
+            margin-bottom: 1.5rem;
+            color: #0052cc;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .warranty-info ul {
+            list-style-type: none;
+        }
+
+        .warranty-info li {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: flex-start;
+            color: #0052cc;
+            transition: var(--transition);
+        }
+
+        .warranty-info li:hover {
+            color: #5196fd;
+            transform: translateX(5px);
+        }
+
+        .warranty-info li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            color: var(--primary);
+            margin-right: 0.75rem;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            margin-top: 4rem;
+            overflow: hidden;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .payment-methods h3 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--gray);
+            position: relative;
+        }
+
+        .payment-methods h3::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .payment-slider {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            animation: scroll 30s linear infinite;
+            width: calc(200px * 10);
+        }
+
+        .payment-method {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 140px;
+            height: 70px;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            padding: 0 1.5rem;
+            transition: var(--transition);
+        }
+
+        .payment-method:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-method img {
+            max-width: 100px;
+            max-height: 50px;
+            filter: grayscale(30%);
+            transition: var(--transition);
+        }
+
+        .payment-method:hover img {
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        /* Guarantee */
+        .guarantee {
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .guarantee h2 {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .guarantee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .guarantee-card {
+            padding: 2rem 2rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            transition: var(--transition-slow);
+            border: 1px solid var(--light-gray);
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .guarantee-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 105, 255, 0.05) 0%, rgba(0, 105, 255, 0) 100%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .guarantee-card:hover {
+            transform: translateY(10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--primary);
+        }
+
+        .guarantee-card:hover::before {
+            opacity: 1;
+        }
+
+        .guarantee-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .guarantee-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .guarantee-card h3 {
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .guarantee-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .guarantee-card:hover h3::after {
+            width: 60px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--darker);
+            color: var(--white);
+            padding: 5rem 0 2rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            opacity: 0.01;
+            z-index: 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 2rem;
+            font-size: 1.25rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+        }
+
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-col a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-col a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+
+        .footer-col a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 1.25rem;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links a:hover {
+            color: var(--white);
+            background: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 105, 255, 0.3);
+        }
+
+        /* Scroll indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            z-index: 99;
+            transition: width 0.1s linear;
+            box-shadow: 0 2px 10px rgba(0, 105, 255, 0.3);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition-slow);
+            z-index: 98;
+            box-shadow: 0 5px 20px rgba(0, 105, 255, 0.3);
+            transform: translateY(20px);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-dark);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 8px 25px rgba(0, 105, 255, 0.4);
+        }
+
+        /* Floating particles animation */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(0, 105, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-140px * 5));
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 1000px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            html {
+                font-size: 15px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 5rem 0;
+            }
+            
+            .about-content {
+                gap: 3rem;
+            }
+            
+            .pricing-cards {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                height: 70px;
+            }
+
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 50vh;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition-slow);
+                z-index: 99;
+            }
+
+            nav.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            nav a {
+                padding: 0.5rem 0;
+                position: relative;
+                display: inline-block;
+            }
+
+            nav a::after {
+                content: '';
+                position: absolute;
+                top: -4px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background-color: var(--primary);
+                transition: var(--transition);
+            }
+
+            nav a:hover::after {
+                width: 100%;
+            }
+
+            .scroll-progress {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 0%;
+                height: 4px;
+                background: linear-gradient(to right, var(--primary), var(--primary-dark));
+                z-index: 99;
+                transition: width 0.1s linear;
+                box-shadow: 0 2px 10px rgba(0, 105, 255, 0.3);
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .hero {
+                padding-top: 120px;
+                min-height: auto;
+            }
+            
+            .hero h1 {
+                font-size: 2.25rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .card.popular::after {
+                top: 8px;
+                right: -28px;
+                padding: 0.2rem 1.5rem;
+                font-size: 0.7rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+    
+            .about-text {
+                padding-right: 0;
+                padding: 0;
+                order: 2;
+            }
+
+            .about-text h2 {
+                margin-bottom: 1.5rem;
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .about-text p {
+                margin-bottom: 1.3rem;
+                line-height: 1.4;
+                font-size: 0.9rem;
+                text-align: justify;
+            }
+            
+            .about-image {
+                order: 1;
+                margin-bottom: 2rem;
+            }
+    
+            .about-stats {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                margin: 2rem 0;
+                gap: 0.8rem;
+            }
+
+            .stat-item {
+                padding: 1.2rem;
+                text-align: center;
+            }
+
+            .stat-number {
+                font-size: 1.8rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.9rem;
+            }
+
+            .about-image img {
+                border-radius: 12px;
+                margin-top: 1rem;
+            }
+
+            #about, #guarantee {
+                padding: 4rem 1.5rem;
+                margin: 2rem 0;
+            }
+    
+            .card-body {
+                padding: 2rem;
+            }
+
+            .pricing-cards {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                gap: 3.5rem;
+                margin: 2rem auto;
+            }
+
+            .card {
+                max-width: 100%;
+            }
+            
+            .card.popular::after {
+                top: 11px;
+                right: -25px;
+                font-size: 0.8rem;
+                padding: 0.3rem 1.3rem;
+            }
+
+            .os-list ul, 
+            .region-list ul {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-slider {
+                animation: scroll 20s linear infinite;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            #about, #guarantee {
+                padding: 3rem 1rem;
+            }
+    
+            .spec-item {
+                padding: 0.8rem 0;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .os-list ul, .region-list ul {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-method {
+                min-width: 120px;
+                height: 60px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn-lg {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll progress indicator -->
+    <div class="scroll-progress"></div>
+
+    <!-- Back to top button -->
+    <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <a href="#" class="logo">
+                    <i class="fab fa-digital-ocean"></i>
+                    <span><strong> Zenith Cloud VPS</strong></span>
+                </a>
+                
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#guarantee">Guarantee</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#support">Support</a></li>
+                    </ul>
+                </nav>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1 class="animate__animated animate__fadeInUp">VPS Hosting Built for Developers</h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s"><strong>Deploy in seconds and scale as you grow with our optimized cloud VPS solutions. Only pay for what you use with predictable monthly pricing.</strong></p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="container" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>What is DigitalOcean?</h2>
+                <p>DigitalOcean is a cloud infrastructure provider focused on simplifying web infrastructure for developers and businesses. Since our founding in 2012, we've grown to serve over a million developers with our simple, reliable cloud platform.</p>
+                
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">1M+</div>
+                        <div class="stat-label">Developers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-label">Global Regions</div>
+                    </div>
+                </div>
+                
+                <p>Our mission is to simplify cloud computing so developers and businesses can spend more time creating software that changes the world.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="DigitalOcean Data Center">
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee Section -->
+    <section class="guarantee-section" id="guarantee">
+        <div class="container">
+            <h2>Our Performance Guarantee</h2>
+            <p class="subtitle">We stand behind our services with these commitments</p>
+            
+            <div class="guarantee">
+                <div class="guarantee-grid">
+                    <div class="guarantee-card">
+                        <i class="fas fa-server"></i>
+                        <h3>99.9% Uptime</h3>
+                        <p><strong>We guarantee 99.9% network uptime for all our VPS services, backed by our SLA with service credits.</strong></p>
+                    </div>
+                    
+                    <div class="guarantee-card">
+                        <i class="fas fa-headset"></i>
+                        <h3>24/7 Support</h3>
+                        <p><strong>Our expert support team is available around the clock to assist you with any technical issues.</strong></p>
+                    </div>
+                    
+                    <div class="guarantee-card">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h3>Affordable Pricing</h3>
+                        <p><strong>Get high-performance VPS at the most competitive prices in the market with no hidden fees.</strong></p>
+                    </div>
+                    
+                    <div class="guarantee-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Security First</h3>
+                        <p><strong>Enterprise-grade security with DDoS protection and regular backups included in all plans.</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section visible" id="pricing">
+        <div class="container">
+            <h2>Simple, Transparent Pricing</h2>
+            <p class="subtitle"><strong>Choose the perfect plan for your Cloud servers applications</strong></p>
+            
+            <div class="pricing-cards">
+                <!-- Basic Plan -->
+                <div class="card popular">
+                    <div class="card-header">
+                        <h3>Bronze</h3>
+                        <div class="price">Rp. 20,000<span>/month</span></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="specs">
+                            <div class="spec-item">
+                                <span>vCPU Cores</span>
+                                <span>2 Core</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Memory</span>
+                                <span>4 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>SSD Storage</span>
+                                <span>80 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Transfer</span>
+                                <span>4 TB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Guarantee</span>
+                                <span>10 Days</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Replaces</span>
+                                <span>2x</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>CPU</span>
+                                <span>Premium AMD & Intel</span>
+                            </div>
+                        </div>
+                        
+                        <div class="os-list">
+                            <h4>Available OS</h4>
+                            <ul>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo-ubuntu_cof-orange-hex.svg/1200px-Logo-ubuntu_cof-orange-hex.svg.png" class="os-icon" alt="Ubuntu"><span>Ubuntu</span></li>
+                                <li><img src="https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/75ada7b8-04f5-447c-8c2b-c1da724e9b40.png?auto=format,compress&fit=max&w=256&q=75&ch=Width,DPR" class="os-icon" alt="Debian"><span>Debian</span></li>
+                                <li><img src="https://images.seeklogo.com/logo-png/2/1/centos-logo-png_seeklogo-28166.png" class="os-icon" alt="CentOS"><span>Cent OS</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Fedora_icon_%282021%29.svg/640px-Fedora_icon_%282021%29.svg.png" class="os-icon" alt="Fedora"><span>Fedora</span></li>
+                                <li><img src="https://static.cdnlogo.com/logos/r/50/rocky-linux.svg" class="os-icon" alt="Rocky Linux"><span>Rocky Linux</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" class="os-icon" alt="Windows"><span>Windows</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="region-list">
+                            <h4>Available Regions</h4>
+                            <ul>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" class="region-icon" alt="Singapore"><span>Singapore</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/10597/10597864.png" class="region-icon" alt="India"><span>India</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/256/197/197484.png" class="region-icon" alt="USA"><span>USA</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" class="region-icon" alt="Germany"><span>Germany</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" class="region-icon" alt="Netherland"><span>Netherland</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" class="region-icon" alt="Canada"><span>Canada</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" class="region-icon" alt="London"><span>London</span></li>
+                            </ul>
+                        </div>
+                        
+                        <a href="#" class="btn">Get Started</a>
+                    </div>
+                </div>
+                
+                <div class="card popular">
+                    <div class="card-header">
+                        <h3>Silver</h3>
+                        <div class="price">Rp. 25,000<span>/month</span></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="specs">
+                            <div class="spec-item">
+                                <span>vCPU Cores</span>
+                                <span>4 Core</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Memory</span>
+                                <span>8 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>SSD Storage</span>
+                                <span>160 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Transfer</span>
+                                <span>6 TB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Guarantee</span>
+                                <span>10 Days</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Replaces</span>
+                                <span>2x</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>CPU</span>
+                                <span>Premium AMD & Intel</span>
+                            </div>
+                        </div>
+                        
+                        <div class="os-list">
+                            <h4>Available OS</h4>
+                            <ul>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo-ubuntu_cof-orange-hex.svg/1200px-Logo-ubuntu_cof-orange-hex.svg.png" class="os-icon" alt="Ubuntu"><span>Ubuntu</span></li>
+                                <li><img src="https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/75ada7b8-04f5-447c-8c2b-c1da724e9b40.png?auto=format,compress&fit=max&w=256&q=75&ch=Width,DPR" class="os-icon" alt="Debian"><span>Debian</span></li>
+                                <li><img src="https://images.seeklogo.com/logo-png/2/1/centos-logo-png_seeklogo-28166.png" class="os-icon" alt="CentOS"><span>Cent OS</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Fedora_icon_%282021%29.svg/640px-Fedora_icon_%282021%29.svg.png" class="os-icon" alt="Fedora"><span>Fedora</span></li>
+                                <li><img src="https://static.cdnlogo.com/logos/r/50/rocky-linux.svg" class="os-icon" alt="Rocky Linux"><span>Rocky Linux</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" class="os-icon" alt="Windows"><span>Windows</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="region-list">
+                            <h4>Available Regions</h4>
+                            <ul>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" class="region-icon" alt="Singapore"><span>Singapore</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/10597/10597864.png" class="region-icon" alt="India"><span>India</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/256/197/197484.png" class="region-icon" alt="USA"><span>USA</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" class="region-icon" alt="Germany"><span>Germany</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" class="region-icon" alt="Netherland"><span>Netherland</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" class="region-icon" alt="Canada"><span>Canada</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" class="region-icon" alt="London"><span>London</span></li>
+                            </ul>
+                        </div>
+                        
+                        <a href="#" class="btn">Get Started</a>
+                    </div>
+                </div>
+                
+                <!-- Premium Plan -->
+                <div class="card popular">
+                    <div class="card-header">
+                        <h3>Gold</h3>
+                        <div class="price">Rp. 30,000<span>/month</span></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="specs">
+                            <div class="spec-item">
+                                <span>vCPU Cores</span>
+                                <span>4 Core</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Memory</span>
+                                <span>16 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>SSD Storage</span>
+                                <span>320 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Transfer</span>
+                                <span>8 TB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Guarantee</span>
+                                <span>10 Days</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Replaces</span>
+                                <span>2x</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>CPU</span>
+                                <span>Premium AMD & Intel</span>
+                            </div>
+                        </div>
+                        
+                        <div class="os-list">
+                            <h4>Available OS</h4>
+                            <ul>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo-ubuntu_cof-orange-hex.svg/1200px-Logo-ubuntu_cof-orange-hex.svg.png" class="os-icon" alt="Ubuntu"><span>Ubuntu</span></li>
+                                <li><img src="https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/75ada7b8-04f5-447c-8c2b-c1da724e9b40.png?auto=format,compress&fit=max&w=256&q=75&ch=Width,DPR" class="os-icon" alt="Debian"><span>Debian</span></li>
+                                <li><img src="https://images.seeklogo.com/logo-png/2/1/centos-logo-png_seeklogo-28166.png" class="os-icon" alt="CentOS"><span>Cent OS</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Fedora_icon_%282021%29.svg/640px-Fedora_icon_%282021%29.svg.png" class="os-icon" alt="Fedora"><span>Fedora</span></li>
+                                <li><img src="https://static.cdnlogo.com/logos/r/50/rocky-linux.svg" class="os-icon" alt="Rocky Linux"><span>Rocky Linux</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" class="os-icon" alt="Windows"><span>Windows</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="region-list">
+                            <h4>Available Regions</h4>
+                            <ul>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" class="region-icon" alt="Singapore"><span>Singapore</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/10597/10597864.png" class="region-icon" alt="India"><span>India</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/256/197/197484.png" class="region-icon" alt="USA"><span>USA</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" class="region-icon" alt="Germany"><span>Germany</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" class="region-icon" alt="Netherland"><span>Netherland</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" class="region-icon" alt="Canada"><span>Canada</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" class="region-icon" alt="London"><span>London</span></li>
+                            </ul>
+                        </div>
+
+                        <a href="#" class="btn">Get Started</a>
+                    </div>
+                </div>
+                <!-- Basic Plan -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Platinum</h3>
+                        <div class="price">Rp. 50,000<span>/month</span></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="specs">
+                            <div class="spec-item">
+                                <span>vCPU Cores</span>
+                                <span>2 Core</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Memory</span>
+                                <span>4 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>SSD Storage</span>
+                                <span>80 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Transfer</span>
+                                <span>4 TB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Guarantee</span>
+                                <span>28 Days</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Replaces</span>
+                                <span>2x</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>CPU</span>
+                                <span>Premium AMD & Intel</span>
+                            </div>
+                        </div>
+                        
+                        <div class="os-list">
+                            <h4>Available OS</h4>
+                            <ul>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo-ubuntu_cof-orange-hex.svg/1200px-Logo-ubuntu_cof-orange-hex.svg.png" class="os-icon" alt="Ubuntu"><span>Ubuntu</span></li>
+                                <li><img src="https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/75ada7b8-04f5-447c-8c2b-c1da724e9b40.png?auto=format,compress&fit=max&w=256&q=75&ch=Width,DPR" class="os-icon" alt="Debian"><span>Debian</span></li>
+                                <li><img src="https://images.seeklogo.com/logo-png/2/1/centos-logo-png_seeklogo-28166.png" class="os-icon" alt="CentOS"><span>Cent OS</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Fedora_icon_%282021%29.svg/640px-Fedora_icon_%282021%29.svg.png" class="os-icon" alt="Fedora"><span>Fedora</span></li>
+                                <li><img src="https://static.cdnlogo.com/logos/r/50/rocky-linux.svg" class="os-icon" alt="Rocky Linux"><span>Rocky Linux</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" class="os-icon" alt="Windows"><span>Windows</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="region-list">
+                            <h4>Available Regions</h4>
+                            <ul>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" class="region-icon" alt="Singapore"><span>Singapore</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/10597/10597864.png" class="region-icon" alt="India"><span>India</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/256/197/197484.png" class="region-icon" alt="USA"><span>USA</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" class="region-icon" alt="Germany"><span>Germany</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" class="region-icon" alt="Netherland"><span>Netherland</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" class="region-icon" alt="Canada"><span>Canada</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" class="region-icon" alt="London"><span>London</span></li>
+                            </ul>
+                        </div>
+                        
+                        <a href="#" class="btn">Get Started</a>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Diamond</h3>
+                        <div class="price">Rp. 60,000<span>/month</span></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="specs">
+                            <div class="spec-item">
+                                <span>vCPU Cores</span>
+                                <span>4 Core</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Memory</span>
+                                <span>8 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>SSD Storage</span>
+                                <span>160 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Transfer</span>
+                                <span>6 TB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Guarantee</span>
+                                <span>28 Days</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Replaces</span>
+                                <span>2x</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>CPU</span>
+                                <span>Premium AMD & Intel</span>
+                            </div>
+                        </div>
+                        
+                        <div class="os-list">
+                            <h4>Available OS</h4>
+                            <ul>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo-ubuntu_cof-orange-hex.svg/1200px-Logo-ubuntu_cof-orange-hex.svg.png" class="os-icon" alt="Ubuntu"><span>Ubuntu</span></li>
+                                <li><img src="https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/75ada7b8-04f5-447c-8c2b-c1da724e9b40.png?auto=format,compress&fit=max&w=256&q=75&ch=Width,DPR" class="os-icon" alt="Debian"><span>Debian</span></li>
+                                <li><img src="https://images.seeklogo.com/logo-png/2/1/centos-logo-png_seeklogo-28166.png" class="os-icon" alt="CentOS"><span>Cent OS</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Fedora_icon_%282021%29.svg/640px-Fedora_icon_%282021%29.svg.png" class="os-icon" alt="Fedora"><span>Fedora</span></li>
+                                <li><img src="https://static.cdnlogo.com/logos/r/50/rocky-linux.svg" class="os-icon" alt="Rocky Linux"><span>Rocky Linux</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" class="os-icon" alt="Windows"><span>Windows</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="region-list">
+                            <h4>Available Regions</h4>
+                            <ul>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" class="region-icon" alt="Singapore"><span>Singapore</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/10597/10597864.png" class="region-icon" alt="India"><span>India</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/256/197/197484.png" class="region-icon" alt="USA"><span>USA</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" class="region-icon" alt="Germany"><span>Germany</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" class="region-icon" alt="Netherland"><span>Netherland</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" class="region-icon" alt="Canada"><span>Canada</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" class="region-icon" alt="London"><span>London</span></li>
+                            </ul>
+                        </div>
+                        
+                        <a href="#" class="btn">Get Started</a>
+                    </div>
+                </div>
+                
+                <!-- Premium Plan -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Ruby</h3>
+                        <div class="price">Rp. 70,000<span>/month</span></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="specs">
+                            <div class="spec-item">
+                                <span>vCPU Cores</span>
+                                <span>4 Core</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Memory</span>
+                                <span>16 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>SSD Storage</span>
+                                <span>320 GB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Transfer</span>
+                                <span>8 TB</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Guarantee</span>
+                                <span>28 Days</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>Replaces</span>
+                                <span>2x</span>
+                            </div>
+                            <div class="spec-item">
+                                <span>CPU</span>
+                                <span>Premium AMD & Intel</span>
+                            </div>
+                        </div>
+                        
+                        <div class="os-list">
+                            <h4>Available OS</h4>
+                            <ul>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo-ubuntu_cof-orange-hex.svg/1200px-Logo-ubuntu_cof-orange-hex.svg.png" class="os-icon" alt="Ubuntu"><span>Ubuntu</span></li>
+                                <li><img src="https://gdm-catalog-fmapi-prod.imgix.net/ProductLogo/75ada7b8-04f5-447c-8c2b-c1da724e9b40.png?auto=format,compress&fit=max&w=256&q=75&ch=Width,DPR" class="os-icon" alt="Debian"><span>Debian</span></li>
+                                <li><img src="https://images.seeklogo.com/logo-png/2/1/centos-logo-png_seeklogo-28166.png" class="os-icon" alt="CentOS"><span>Cent OS</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Fedora_icon_%282021%29.svg/640px-Fedora_icon_%282021%29.svg.png" class="os-icon" alt="Fedora"><span>Fedora</span></li>
+                                <li><img src="https://static.cdnlogo.com/logos/r/50/rocky-linux.svg" class="os-icon" alt="Rocky Linux"><span>Rocky Linux</span></li>
+                                <li><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Windows_logo_-_2012.svg" class="os-icon" alt="Windows"><span>Windows</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="region-list">
+                            <h4>Available Regions</h4>
+                            <ul>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/197/197496.png" class="region-icon" alt="Singapore"><span>Singapore</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/128/10597/10597864.png" class="region-icon" alt="India"><span>India</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/256/197/197484.png" class="region-icon" alt="USA"><span>USA</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197571.png" class="region-icon" alt="Germany"><span>Germany</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197441.png" class="region-icon" alt="Netherland"><span>Netherland</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197430.png" class="region-icon" alt="Canada"><span>Canada</span></li>
+                                <li><img src="https://cdn-icons-png.flaticon.com/512/197/197374.png" class="region-icon" alt="London"><span>London</span></li>
+                            </ul>
+                        </div>
+
+                        <a href="#" class="btn">Get Started</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rules Information -->
+            <div class="warranty-info">
+                <h3><i class="fas fa-shield-alt"></i> Rules & Terms</h3>
+
+                <ul>
+                    <li><strong>Don't use VPN on VPS</strong></li>
+                    <li><strong>Don't use for DDoS</strong></li>
+                    <li><strong>Don't use for Mining</strong></li>
+                    <li><strong>Don't use for Carding</strong></li>
+                    <li><strong>Don't use for Hacking</strong></li>
+                    <li><strong>Don't use for Illegal Activity</strong></li>
+                    <li><strong>Do not Restart the VPS</strong></li>
+                    <li><strong>Do not Shutdown the VPS</strong></li>
+                </ul>
+
+                <h5><i class="fas fa-exclamation-triangle"></i> If you break the rules above, the VPS will be deleted and your guarantee does not apply</h5>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="payment-methods">
+                <h3>Accepted Payment Methods</h3>
+                <div class="payment-slider">
+                    <div class="payment-method"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQNnB_OcZSipI_yJNG2xLXnkuuzn1BKB9z91Oyy6xcoYZ9RYZKFA9rxVfs85Xcv1jHj3qq03WDQxzOMj6LBqU_RzPA3oRw6FfsM9NLFNEHjBQryW16T7khsDBwj8maLCUTnZ20VUiX8o5yKYNYlO4V0gguYjm8sS7Sgzc3iJ1_tajbkkRC3u-6RiMk5A/s1702/Logo%20ShopeePay.png" alt="Mastercard"></div>
+                    <div class="payment-method"><img src="https://antinomi.org/wp-content/uploads/2022/03/logo-gopay-vector.png" alt="Visa"></div>
+                    <div class="payment-method"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Logo_ovo_purple.svg/640px-Logo_ovo_purple.svg.png" alt="American Express"></div>
+                    <div class="payment-method"><img src="https://upload.wikimedia.org/wikipedia/commons/c/cd/PayPal_logo_2008.svg" alt="PayPal"></div>
+                    <div class="payment-method"><img src="https://www.freepnglogos.com/uploads/logo-bca-png/bank-central-asia-logo-bank-central-asia-bca-format-cdr-png-gudril-1.png" alt="Bitcoin"></div>
+                    <div class="payment-method"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/QRIS_logo.svg/384px-QRIS_logo.svg.png?20201215043119" alt="Stripe"></div>
+                    <div class="payment-method"><img src="https://cdn.sanity.io/images/0k2k2bbv/production/3ad87002d595cf660789d47221e076e9888657da-4001x1265.png?w=300&q=75&fit=max&auto=format" alt="Apple Pay"></div>
+                    <div class="payment-method"><img src="https://bloguna.com/wp-content/uploads/2025/05/Logo-DANA-Format-PNG-CDR-AI-EPS-SVG-300x164.png" alt="Google Pay"></div>
+                    <div class="payment-method"><img src="https://static.cdnlogo.com/logos/b/40/bank-mandiri.svg" alt="Skrill"></div>
+                    <div class="payment-method"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a1/Danamon_(2024).svg" alt="Bitcoin Cash"></div>
+                    <!-- Duplicate for seamless looping -->
+                    <div class="payment-method"><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjQNnB_OcZSipI_yJNG2xLXnkuuzn1BKB9z91Oyy6xcoYZ9RYZKFA9rxVfs85Xcv1jHj3qq03WDQxzOMj6LBqU_RzPA3oRw6FfsM9NLFNEHjBQryW16T7khsDBwj8maLCUTnZ20VUiX8o5yKYNYlO4V0gguYjm8sS7Sgzc3iJ1_tajbkkRC3u-6RiMk5A/s1702/Logo%20ShopeePay.png" alt="Mastercard"></div>
+                    <div class="payment-method"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/1200px-Visa_Inc._logo.svg.png" alt="Visa"></div>
+                    <div class="payment-method"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo_%282018%29.svg/1200px-American_Express_logo_%282018%29.svg.png" alt="American Express"></div>
+                    <div class="payment-method"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/PayPal.svg/1200px-PayPal.svg.png" alt="PayPal"></div>
+                    <div class="payment-method"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Bitcoin.svg/1200px-Bitcoin.svg.png" alt="Bitcoin"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="support">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>About DigitalOcean</h4>
+                    <p>DigitalOcean is a cloud infrastructure provider focused on simplifying web infrastructure for developers and businesses. Since our founding in 2012, we've grown to serve over a million developers with our simple, reliable cloud platform.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#guarantee"><i class="fas fa-chevron-right"></i> Our Guarantee</a></li>
+                        <li><a href="#pricing"><i class="fas fa-chevron-right"></i> Pricing Plans</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <div class="social-links">
+                        <a href="#" title="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="footer-bottom">
+                <p><strong>&copy; 2025 ZenithCloud, LLC. All rights reserved.</strong></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                this.innerHTML = mainNav.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                document.body.style.overflow = mainNav.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Close mobile menu if open
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                            document.body.style.overflow = '';
+                        }
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Scroll progress indicator
+            const scrollProgress = document.querySelector('.scroll-progress');
+            window.addEventListener('scroll', function() {
+                const scrollTop = document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight;
+                const clientHeight = document.documentElement.clientHeight;
+                const scrollPercentage = (scrollTop / (scrollHeight - clientHeight)) * 100;
+                scrollProgress.style.width = scrollPercentage + '%';
+                
+                // Header shadow on scroll
+                if (window.pageYOffset > 50) {
+                    document.querySelector('header').classList.add('scrolled');
+                } else {
+                    document.querySelector('header').classList.remove('scrolled');
+                }
+            });
+            
+            // Back to top button
+            const backToTopBtn = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('visible');
+                } else {
+                    backToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Card hover effect enhancement
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Intersection Observer for scroll animations
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Hero animation
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.classList.add('visible');
+            }
+
+            // Create floating particles
+            function createParticles() {
+                const particlesContainer = document.createElement('div');
+                particlesContainer.className = 'particles';
+                document.body.appendChild(particlesContainer);
+                
+                const particleCount = 20;
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    
+                    // Random size between 2px and 6px
+                    const size = Math.random() * 4 + 2;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Random position
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    // Random animation duration and delay
+                    const duration = Math.random() * 20 + 10;
+                    const delay = Math.random() * 5;
+                    particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                    
+                    // Random opacity
+                    particle.style.opacity = Math.random() * 0.4 + 0.1;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            
+            createParticles();
+        });
+    </script>
+</body>
+</html>
